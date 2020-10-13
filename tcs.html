@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .box {
+    width: 250px;
+    height: 250px;
+    border: 1px solid #000;
+  }
+
+  .box span {
+    float: left;
+    width: 10px;
+    height: 10px;
+    /* border: 0.5px solid #000; */
+    box-sizing: border-box;
+    font-size: 10px;
+    text-align: center;
+    line-height: 25px;
+  }
+  /* 身体颜色 */
+  .snakeColor {
+    background: pink;
+  }
+  /* 食物颜色 权限高于蛇身 */
+  .box .foodColor {
+    border-radius: 50%;
+    background-color: aquamarine;
+  }
+  /* 被吃掉的食物 */
+  .box .bellyFoodColor{
+    background-color: aquamarine;
+  }
+</style>
+
+<body>
+  <div id="box" class="box"></div>
+</body>
+<script src="snake.js"></script>
+<script>
+  let box = document.getElementById('box')
+  let fragment = document.createDocumentFragment()
+
+  let bodyList = [1, 2, 3]
+  // 创建span
+  let sum = getCol() * getRow()
+  for (let i = 1; i <= sum; i++) {
+    let son = document.createElement('span')
+    son.setAttribute('index', i)
+    // son.innerText = i
+    fragment.appendChild(son)
+  }
+  box.appendChild(fragment)
+
+  // 生成实例
+  let snake = new Snake(box, bodyList, 100)
+
+
+
+
+  // 获取列数
+  function getCol() {
+    // span 宽度
+    let spanWidth = 10
+    // 父盒子 宽度
+    let fatherWidth = box.offsetWidth
+    // 列数
+    let col = Math.floor(fatherWidth / spanWidth)
+    return col
+  }
+  // 获取行数
+  function getRow() {
+    // span 高度
+    let spanHeight = 10
+    // 父盒子 高度
+    let fatherHeight = box.offsetHeight
+    // 行数
+    let row = Math.floor(fatherHeight / spanHeight)
+    return row
+
+  }
+</script>
+
+</html>
